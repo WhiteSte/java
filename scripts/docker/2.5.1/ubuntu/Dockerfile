@@ -5,10 +5,18 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN set -ex && \
     apt update -y && \
-    apt install --no-install-recommends -y openjdk-8-jdk
+    apt install -y apt-transport-https gnupg
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-amd6
-RUN update-alternatives --set java `update-alternatives --list java | grep java-8`
+# Adoptium GPG keys and repository
+RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add -
+RUN echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+
+RUN set -ex && \
+    apt update -y && \
+    apt install --no-install-recommends -y temurin-8-jdk
+
+ENV JAVA_HOME /usr/lib/jvm/temurin-8-jdk-amd64
+RUN update-alternatives --set java `update-alternatives --list java | grep temurin-8`
 
 RUN apt-get -y install bash gcc g++ cmake wget unzip gpg software-properties-common
 
