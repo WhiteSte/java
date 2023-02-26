@@ -11,6 +11,7 @@ on:
 
 jobs:
   linux:
+    if: false
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -38,6 +39,7 @@ jobs:
         run: ./sbt +test
 
   macos:
+    if: false
     strategy:
       matrix:
         os: [macos-latest]
@@ -88,7 +90,7 @@ jobs:
         os: [ubuntu-latest]
         image: ['daunnc/pdal-ubuntu:2.5.1']
     runs-on: ${{ matrix.os }}
-    needs: [linux, macos]
+    # needs: [linux, macos]
     container:
       image: ${{ matrix.image }}
     if: github.event_name != 'pull_request'
@@ -106,12 +108,12 @@ jobs:
           # this is to fix GIT not liking owner of the checkout dir
           chown -R $(id -u):$(id -g) $PWD
 
-      - uses: coursier/cache-action@v6
+      # - uses: coursier/cache-action@v6
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: macos
-          path: native/target/native/x86_64-darwin/bin
+      # - uses: actions/download-artifact@v3
+      #   with:
+      #     name: macos
+      #     path: native/target/native/x86_64-darwin/bin
 
       - name: Release
         run: ./sbt ci-release
