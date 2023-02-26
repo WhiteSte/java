@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: ['**']
   push:
-    branches: ['main']
+    branches: ['**']
     tags: [v*]
   # release:
     # types: [published]
@@ -107,6 +107,9 @@ jobs:
         run: |
           # this is to fix GIT not liking owner of the checkout dir
           chown -R $(id -u):$(id -g) $PWD
+
+      - name: Java version
+        run: java -version
 
       # - uses: coursier/cache-action@v6
 
