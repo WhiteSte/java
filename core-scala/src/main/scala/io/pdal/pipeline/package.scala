@@ -16,4 +16,6 @@
 
 package io.pdal
 
-package object pipeline extends json.Implicits with syntax.Implicits with Serializable
+package object pipeline extends json.Implicits with syntax.Implicits {
+  import io.pdal.pipeline.test._
+} // with Serializable
