@@ -88,7 +88,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        image: ['daunnc/pdal-ubuntu:2.5.1-temurin-11']
+        image: ['daunnc/pdal-ubuntu:2.5.1-temurin']
     runs-on: ${{ matrix.os }}
     # needs: [linux, macos]
     container:

@@ -13,10 +13,10 @@ RUN echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION
 
 RUN set -ex && \
     apt update -y && \
-    apt install --no-install-recommends -y temurin-11-jdk
+    apt install --no-install-recommends -y temurin-8-jdk
 
-ENV JAVA_HOME /usr/lib/jvm/temurin-11-jdk-amd64
-RUN update-alternatives --set java `update-alternatives --list java | grep temurin-11`
+ENV JAVA_HOME /usr/lib/jvm/temurin-8-jdk-amd64
+RUN update-alternatives --set java `update-alternatives --list java | grep temurin-8`
 
 RUN apt-get -y install bash gcc g++ cmake wget unzip gpg software-properties-common
 
