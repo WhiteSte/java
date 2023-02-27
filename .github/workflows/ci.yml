@@ -119,7 +119,7 @@ jobs:
       #     path: native/target/native/x86_64-darwin/bin
 
       - name: Release
-        run: ./sbt ++2.13 core-scala/publish
+        run: ./sbt ++2.13 core-scala/publishLocal
         env:
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
           PGP_SECRET: ${{ secrets.PGP_SECRET }}
