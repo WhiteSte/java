@@ -1,17 +1,9 @@
 name := "pdal-jni"
 
 val scala212 = "2.12.17"
-val scala213 = "2.13.7"
+val scala213 = "2.13.11-bin-SNAPSHOT"
 val scala3 = "3.2.2"
 val scalaVersions = Seq(scala3, scala213, scala212)
-
-val predef = Vector(
-  "java.lang",
-  "scala",
-  "scala.Predef",
-  "io",
-  "io.pdal"
-).mkString("-Yimports:", ",", "")
 
 lazy val commonSettings = Seq(
   scalaVersion := scalaVersions.head,
@@ -71,7 +63,6 @@ lazy val `core-scala` = project
       Dependencies.scalaTest % Test
     )
   )
-  .settings(scalacOptions += predef)
   .dependsOn(core)
   .dependsOn(Environment.dependOnNative(native % Runtime): _*)
 

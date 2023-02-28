@@ -111,6 +111,12 @@ jobs:
       - name: Java version
         run: java -version
 
+      - name: Scala compiler fix install
+        run: |
+          git clone https://github.com/som-snytt/scala.git && cd scala && git checkout -f issue/12740-serializable-package-object
+          wget https://raw.githubusercontent.com/dwijnand/sbt-extras/master/sbt && chmod +x ./sbt
+          ./sbt publishLocal
+
       # - uses: coursier/cache-action@v6
 
       # - uses: actions/download-artifact@v3
